@@ -26,6 +26,7 @@ const taskController = {
   async createTask(req, res) {
     try {
       const validation = validateTask(req.body);
+      console.log(validation,"validations")
       if (!validation.isValid) {
         return res.status(400).json({ errors: validation.errors });
       }
@@ -33,6 +34,7 @@ const taskController = {
       const task = await Task.create(req.body);
       res.status(201).json(task);
     } catch (error) {
+      console.log(error.message)
       res.status(500).json({ error: 'Failed to create task' });
     }
   },
@@ -66,3 +68,4 @@ const taskController = {
     }
   }
 };
+module.exports = taskController;
